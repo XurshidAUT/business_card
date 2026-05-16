@@ -1,0 +1,392 @@
+:root {
+    --red: #e2231a;
+    --red-soft: #ff4d3d;
+    --ink: #0a0a0b;
+    --glass: rgba(255, 255, 255, 0.07);
+    --glass-strong: rgba(255, 255, 255, 0.12);
+    --stroke: rgba(255, 255, 255, 0.16);
+    --text: #f4f4f5;
+    --muted: rgba(244, 244, 245, 0.62);
+    --silver: rgba(244, 244, 245, 0.55);
+    --silver-dim: rgba(244, 244, 245, 0.34);
+    --hairline: rgba(255, 255, 255, 0.22);
+    --radius: 28px;
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: var(--font);
+    background: var(--ink);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100svh;
+    padding: 24px;
+    overflow: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Размытый фон ---------- */
+.bg-blob {
+    position: fixed;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    filter: blur(95px);
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform;
+}
+.bg-blob--1 {
+    background: radial-gradient(circle at 30% 30%, #3c3c43 0%, transparent 65%);
+    top: -22vmax; left: -16vmax;
+    animation: drift1 18s ease-in-out infinite alternate;
+}
+.bg-blob--2 {
+    background: radial-gradient(circle at 70% 70%, #18181b 0%, transparent 65%);
+    bottom: -24vmax; right: -18vmax;
+    animation: drift2 22s ease-in-out infinite alternate;
+}
+.bg-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+}
+
+@keyframes drift1 {
+    to { transform: translate3d(8vmax, 6vmax, 0) scale(1.15); }
+}
+@keyframes drift2 {
+    to { transform: translate3d(-7vmax, -5vmax, 0) scale(1.12); }
+}
+
+/* ---------- Сцена и 3D-переворот ---------- */
+.scene {
+    position: relative;
+    z-index: 1;
+    width: clamp(300px, 86vw, 380px);
+    height: clamp(500px, 80svh, 620px);
+    perspective: 1600px;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+    outline: none;
+}
+.card.is-flipped { transform: rotateY(180deg); }
+.card:focus-visible { outline: 2px solid var(--red-soft); outline-offset: 8px; border-radius: var(--radius); }
+
+/* ---------- Стеклянные стороны ---------- */
+.face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius);
+    padding: 38px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(155deg, var(--glass-strong), var(--glass));
+    border: 1px solid var(--stroke);
+    box-shadow:
+        0 30px 60px -20px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+}
+.face--front { justify-content: flex-start; gap: 0; }
+.face--back  { transform: rotateY(180deg); justify-content: flex-start; gap: 18px; }
+
+/* блик на стекле */
+.face__glow {
+    position: absolute;
+    top: -40%;
+    left: -30%;
+    width: 160%;
+    height: 90%;
+    pointer-events: none;
+}
+.face--front .face__glow {
+    top: -46%;
+    left: -25%;
+    width: 150%;
+    height: 80%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.07), transparent 62%);
+}
+.face--back .face__glow {
+    background: radial-gradient(ellipse at center, rgba(226, 35, 26, 0.25), transparent 60%);
+}
+.face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent 30%);
+    pointer-events: none;
+}
+
+/* ---------- Лицевая сторона ---------- */
+.brandbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    z-index: 1;
+}
+.brandbar__name {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.46em;
+    text-indent: 0.46em;
+    text-transform: uppercase;
+    color: var(--silver);
+}
+.brandbar__rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        var(--hairline) 22%,
+        rgba(255, 255, 255, 0.3) 50%,
+        var(--hairline) 78%,
+        transparent);
+}
+
+.front-center {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    z-index: 1;
+}
+
+.logo-badge {
+    width: 122px;
+    height: 122px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 36%, #ffffff, #ededf0 60%, #dedee2);
+    box-shadow:
+        0 22px 46px -16px rgba(0, 0, 0, 0.72),
+        0 0 0 1px rgba(255, 255, 255, 0.55),
+        0 0 0 9px rgba(255, 255, 255, 0.035),
+        0 0 0 10px rgba(255, 255, 255, 0.07),
+        inset 0 -7px 16px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+}
+.logo-badge img { width: 76%; height: auto; display: block; }
+
+.identity { text-align: center; z-index: 1; }
+.identity__name {
+    font-size: clamp(24px, 6.6vw, 29px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.18;
+    background: linear-gradient(180deg, #ffffff 0%, #d8d8dc 56%, #bdbdc3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+.identity__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--silver-dim);
+}
+.identity__rule {
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34));
+}
+.identity__rule:last-child {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.34), transparent);
+}
+
+/* ---------- Подсказка переворота ---------- */
+.flip-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    z-index: 1;
+}
+.flip-hint__icon {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--red-soft);
+    animation: spin 4s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Обратная сторона ---------- */
+.back-head { text-align: center; z-index: 1; margin-top: 4px; }
+.back-head__brand {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.back-head__sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+}
+
+.contacts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1;
+}
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--stroke);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.contact:hover, .contact:active {
+    transform: translateY(-2px);
+    background: rgba(226, 35, 26, 0.14);
+    border-color: rgba(255, 77, 61, 0.45);
+}
+.contact__ic {
+    flex: none;
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(226, 35, 26, 0.16);
+    color: var(--red-soft);
+}
+.contact__txt {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.contact__txt small {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+}
+
+/* ---------- QR ---------- */
+.qr {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+}
+.qr__tile {
+    width: 116px;
+    height: 116px;
+    padding: 9px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.5);
+}
+.qr__tile img { width: 100%; height: 100%; display: block; }
+.qr__cap { font-size: 11px; color: var(--muted); text-align: center; }
+
+/* ---------- Кнопка сохранения ---------- */
+.save-btn {
+    margin-top: auto;
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 16px;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--red-soft), var(--red));
+    box-shadow: 0 14px 30px -10px rgba(226, 35, 26, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    z-index: 1;
+}
+.save-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.save-btn:active { transform: translateY(0) scale(0.99); }
+.save-btn.is-done {
+    background: linear-gradient(135deg, #1f9d55, #157a40);
+    box-shadow: 0 14px 30px -12px rgba(31, 157, 85, 0.75);
+}
+
+.flip-hint--back { bottom: 16px; }
+
+/* ---------- Мелкие экраны по высоте ---------- */
+@media (max-height: 620px) {
+    .face { padding: 26px 24px; }
+    .front-center { gap: 18px; }
+    .logo-badge { width: 104px; height: 104px; }
+    .qr__tile { width: 96px; height: 96px; }
+}
+
+/* ---------- Уважение к настройке «меньше движения» ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .bg-blob, .flip-hint__icon { animation: none; }
+    .card { transition-duration: 0.45s; }
+}
