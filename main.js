@@ -57,6 +57,16 @@ const I18N = {
         f5d: "Холодовая цепь и быстрая отгрузка — мясо приходит свежим.",
         aboutTagline: "Ваше спокойствие — наша миссия",
         aboutCta: "Подробнее на сайте",
+        supKicker: "Поставки в цифрах",
+        sup1n: "≈ 30 000 т/год",
+        sup1l: "Frozen beef — Индия",
+        sup2n: "3 000–5 000 т",
+        sup2l: "Chilled beef — Беларусь",
+        supAlso: "Также в ассортименте: frozen chicken · frozen duck breast",
+        parKicker: "Эксклюзивные партнёры",
+        pn3: "Заводы Когон",
+        cIndia: "🇮🇳 Индия",
+        cUzbekistan: "🇺🇿 Узбекистан",
     },
     en: {
         flipFront: "Tap to open contacts",
@@ -84,6 +94,16 @@ const I18N = {
         f5d: "Cold chain and fast dispatch keep the meat fresh.",
         aboutTagline: "Your peace of mind is our mission",
         aboutCta: "More on our website",
+        supKicker: "Supply in numbers",
+        sup1n: "≈ 30,000 t/yr",
+        sup1l: "Frozen beef — India",
+        sup2n: "3,000–5,000 t",
+        sup2l: "Chilled beef — Belarus",
+        supAlso: "Also available: frozen chicken · frozen duck breast",
+        parKicker: "Exclusive partners",
+        pn3: "Kogon plants",
+        cIndia: "🇮🇳 India",
+        cUzbekistan: "🇺🇿 Uzbekistan",
     },
     zh: {
         flipFront: "点击查看联系方式",
@@ -111,6 +131,16 @@ const I18N = {
         f5d: "冷链运输与快速发货，保证新鲜。",
         aboutTagline: "您的安心，是我们的使命",
         aboutCta: "了解更多",
+        supKicker: "年供应规模",
+        sup1n: "≈ 30,000 吨/年",
+        sup1l: "冷冻牛肉 — 印度",
+        sup2n: "3,000–5,000 吨",
+        sup2l: "冰鲜牛肉 — 白俄罗斯",
+        supAlso: "另有：冷冻鸡肉 · 冷冻鸭胸",
+        parKicker: "独家合作伙伴",
+        pn3: "科贡工厂",
+        cIndia: "🇮🇳 印度",
+        cUzbekistan: "🇺🇿 乌兹别克斯坦",
     },
 };
 
@@ -197,6 +227,40 @@ function buildAbout() {
         '</figure>' +
         '<p class="about__lead" data-i18n="aboutLead"></p>' +
         '<ul class="about__list">' + feats + '</ul>' +
+
+        '<div class="about__kicker">' +
+            '<span class="about__rule" aria-hidden="true"></span>' +
+            '<span data-i18n="supKicker">Поставки в цифрах</span>' +
+            '<span class="about__rule" aria-hidden="true"></span>' +
+        '</div>' +
+        '<img class="about__banner" src="img/brand.jpg" alt="Bizning Gosht" loading="lazy">' +
+        '<div class="stats">' +
+            '<div class="stat"><span class="stat__n" data-i18n="sup1n"></span>' +
+            '<span class="stat__l" data-i18n="sup1l"></span></div>' +
+            '<div class="stat"><span class="stat__n" data-i18n="sup2n"></span>' +
+            '<span class="stat__l" data-i18n="sup2l"></span></div>' +
+        '</div>' +
+        '<p class="sup-also" data-i18n="supAlso"></p>' +
+        '<div class="prodstrip">' +
+            '<img src="img/beef1.jpg" alt="" loading="lazy">' +
+            '<img src="img/beef2.jpg" alt="" loading="lazy">' +
+            '<img src="img/beef3.jpg" alt="" loading="lazy">' +
+        '</div>' +
+
+        '<div class="about__kicker">' +
+            '<span class="about__rule" aria-hidden="true"></span>' +
+            '<span data-i18n="parKicker">Эксклюзивные партнёры</span>' +
+            '<span class="about__rule" aria-hidden="true"></span>' +
+        '</div>' +
+        '<div class="partners">' +
+            '<div class="partner"><b>Allasons Group</b>' +
+            '<span data-i18n="cIndia"></span></div>' +
+            '<div class="partner"><b>Rustamfoods</b>' +
+            '<span data-i18n="cIndia"></span></div>' +
+            '<div class="partner"><b data-i18n="pn3"></b>' +
+            '<span data-i18n="cUzbekistan"></span></div>' +
+        '</div>' +
+
         '<div class="about__gallery">' +
             '<img src="img/hero2.jpg" alt="" loading="lazy">' +
             '<img src="img/photo1.jpg" alt="" loading="lazy">' +
