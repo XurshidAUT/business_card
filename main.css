@@ -614,6 +614,91 @@ html[lang="zh"] .contact__txt small { letter-spacing: 0.04em; }
     border-color: rgba(255, 255, 255, 0.3);
 }
 
+/* ---------- О компании: поставки и партнёры ---------- */
+.about__banner {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--stroke);
+    box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.85);
+}
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 18px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--stroke);
+}
+.stat__n {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+    background: linear-gradient(180deg, #ffffff, #c9c9cf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+.stat__l {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(244, 244, 245, 0.6);
+}
+.sup-also {
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(244, 244, 245, 0.6);
+}
+.prodstrip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.prodstrip img {
+    width: 100%;
+    height: 98px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--stroke);
+}
+.partners {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.partner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--stroke);
+}
+.partner b {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+.partner span {
+    font-size: 12.5px;
+    color: rgba(244, 244, 245, 0.58);
+    white-space: nowrap;
+}
+html[lang="zh"] .about__kicker { letter-spacing: 0.14em; text-indent: 0; }
+
 /* ---------- Мелкие экраны по высоте ---------- */
 @media (max-height: 620px) {
     .face { padding: 26px 24px; }
