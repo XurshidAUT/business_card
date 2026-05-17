@@ -4,10 +4,10 @@ const VCARD = [
     "VERSION:3.0",
     "N:Boymirzayev;Islomjon;;;",
     "FN:Islomjon Boymirzayev",
-    "ORG:BizningGosht",
-    "TITLE:Founder",
+    "ORG:Bizning Gosht",
+    "TITLE:Founder & CEO",
     "TEL;TYPE=CELL:+998946666664",
-    "EMAIL;TYPE=INTERNET:islomgosht@gmail.com",
+    "EMAIL;TYPE=INTERNET:ceo@bizninggosht.uz",
     "URL:https://t.me/MBimporteRs",
     "END:VCARD"
 ].join("\r\n") + "\r\n";
