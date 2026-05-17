@@ -1,5 +1,5 @@
 // ===== Данные контакта (vCard 3.0) =====
-// Поля задаются на странице через window.CARD; ниже — запасные значения.
+
 const CARD = window.CARD || {
     family: "Boymirzayev",
     given:  "Islomjon",
