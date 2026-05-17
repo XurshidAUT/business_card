@@ -12,8 +12,92 @@ const VCARD = [
     "END:VCARD"
 ].join("\r\n") + "\r\n";
 
+// ===== Переводы интерфейса (RU / EN / 中文) =====
+const I18N = {
+    ru: {
+        flipFront: "Нажмите, чтобы открыть контакты",
+        contacts:  "Контакты",
+        lblPhone:  "Телефон",
+        lblEmail:  "Email",
+        lblTelegram: "Telegram",
+        qrCap:     "Наведите камеру — контакт сохранится сам",
+        save:      "Сохранить контакт",
+        saved:     "Контакт сохранён",
+        back:      "Назад",
+    },
+    en: {
+        flipFront: "Tap to open contacts",
+        contacts:  "Contacts",
+        lblPhone:  "Phone",
+        lblEmail:  "Email",
+        lblTelegram: "Telegram",
+        qrCap:     "Point your camera — the contact saves itself",
+        save:      "Save contact",
+        saved:     "Contact saved",
+        back:      "Back",
+    },
+    zh: {
+        flipFront: "点击查看联系方式",
+        contacts:  "联系方式",
+        lblPhone:  "电话",
+        lblEmail:  "邮箱",
+        lblTelegram: "Telegram",
+        qrCap:     "用相机扫一扫，自动保存联系人",
+        save:      "保存联系人",
+        saved:     "已保存联系人",
+        back:      "返回",
+    },
+};
+
 const card    = document.getElementById("card");
 const saveBtn = document.querySelector(".save-btn");
+const saveTxt = saveBtn.querySelector(".save-btn__txt");
+
+// ===== Язык: определение, применение, сохранение =====
+function detectLang() {
+    try {
+        const saved = localStorage.getItem("cardLang");
+        if (saved && I18N[saved]) return saved;
+    } catch (_) { /* localStorage может быть недоступен */ }
+
+    const n = (navigator.language || "ru").toLowerCase();
+    if (n.startsWith("zh")) return "zh";
+    if (n.startsWith("en")) return "en";
+    if (n.startsWith("ru")) return "ru";
+    return "ru";
+}
+
+function currentLang() {
+    const l = document.documentElement.lang;
+    return I18N[l] ? l : "ru";
+}
+
+function applyLang(lang) {
+    if (!I18N[lang]) lang = "ru";
+    const dict = I18N[lang];
+
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll(".lang__btn").forEach((b) => {
+        const on = b.dataset.lang === lang;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    try { localStorage.setItem("cardLang", lang); } catch (_) { /* не критично */ }
+}
+
+document.querySelectorAll(".lang__btn").forEach((b) => {
+    b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        applyLang(b.dataset.lang);
+    });
+});
+
+applyLang(detectLang());
 
 // ===== Скачивание контакта на телефон =====
 function downloadVCard() {
@@ -51,20 +135,19 @@ card.addEventListener("keydown", (e) => {
 });
 
 // ===== Кнопка «Сохранить контакт» =====
+let saveResetTimer;
 saveBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     downloadVCard();
 
+    const dict = I18N[currentLang()];
     saveBtn.classList.add("is-done");
-    const original = saveBtn.innerHTML;
-    saveBtn.innerHTML =
-        '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">' +
-        '<path fill="currentColor" d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg>' +
-        "Контакт сохранён";
+    saveTxt.textContent = dict.saved;
 
-    setTimeout(() => {
+    clearTimeout(saveResetTimer);
+    saveResetTimer = setTimeout(() => {
         saveBtn.classList.remove("is-done");
-        saveBtn.innerHTML = original;
+        saveTxt.textContent = I18N[currentLang()].save;
     }, 2600);
 });
 
