@@ -374,8 +374,63 @@ body {
     background: linear-gradient(135deg, #1f9d55, #157a40);
     box-shadow: 0 14px 30px -12px rgba(31, 157, 85, 0.75);
 }
+.save-btn__ic { flex: none; }
+.save-btn__ic--done { display: none; }
+.save-btn.is-done .save-btn__ic--save { display: none; }
+.save-btn.is-done .save-btn__ic--done { display: inline-block; }
 
 .flip-hint--back { bottom: 16px; }
+
+/* ---------- Переключатель языка ---------- */
+.lang {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--stroke);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 12px 30px -16px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.lang__btn {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--silver-dim);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.lang__btn:hover { color: var(--text); }
+.lang__btn.is-active {
+    color: #0a0a0b;
+    background: linear-gradient(180deg, #ffffff, #d8d8dc);
+    box-shadow: 0 2px 8px -3px rgba(0, 0, 0, 0.55);
+}
+.lang__btn:focus-visible {
+    outline: 2px solid var(--silver);
+    outline-offset: 2px;
+}
+
+/* ---------- Китайский: тоньше трекинг у разрядки ---------- */
+html[lang="zh"] .identity__title { letter-spacing: 0.14em; text-indent: 0; }
+html[lang="zh"] .back-head__sub { letter-spacing: 0.16em; }
+html[lang="zh"] .contact__txt small { letter-spacing: 0.04em; }
 
 /* ---------- Мелкие экраны по высоте ---------- */
 @media (max-height: 620px) {
@@ -383,6 +438,8 @@ body {
     .front-center { gap: 18px; }
     .logo-badge { width: 104px; height: 104px; }
     .qr__tile { width: 96px; height: 96px; }
+    .lang { top: calc(env(safe-area-inset-top, 0px) + 8px); }
+    .lang__btn { padding: 6px 12px; font-size: 11px; }
 }
 
 /* ---------- Уважение к настройке «меньше движения» ---------- */
