@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Hasan Abidov — Bizning Go'sht</title>
+    <meta name="description" content="Цифровая визитка · Hasan Abidov · CEO, Bizning Go'sht">
+
+    <!-- Красивый предпросмотр при отправке ссылки в Telegram / WhatsApp -->
+    <meta property="og:title" content="Hasan Abidov — Bizning Go'sht">
+    <meta property="og:description" content="CEO, Bizning Go'sht. Нажмите, чтобы сохранить контакт.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:type" content="profile">
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body class="v-hasan">
+
+    <div class="bg-blob bg-blob--1" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob--2" aria-hidden="true"></div>
+    <div class="bg-grain" aria-hidden="true"></div>
+
+    <div class="lang" role="group" aria-label="Язык / Language / 语言">
+        <button class="lang__btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
+        <button class="lang__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button class="lang__btn" type="button" data-lang="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <main class="scene">
+        <div class="card" id="card" role="button" tabindex="0"
+             aria-label="Визитка. Нажмите, чтобы перевернуть">
+
+            <!-- ЛИЦЕВАЯ СТОРОНА -->
+            <section class="face face--front">
+                <div class="face__glow" aria-hidden="true"></div>
+
+                <div class="brandbar">
+                    <span class="brandbar__name">Bizning Go'sht</span>
+                    <span class="brandbar__rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="front-center">
+                    <div class="logo-badge">
+                        <img src="logo.png" alt="Логотип Bizning Go'sht">
+                    </div>
+
+                    <div class="identity">
+                        <h1 class="identity__name">Hasan&nbsp;Abidov</h1>
+                        <p class="identity__title">
+                            <span class="identity__rule" aria-hidden="true"></span>
+                            CEO
+                            <span class="identity__rule" aria-hidden="true"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <span class="flip-hint">
+                    <span class="flip-hint__icon" aria-hidden="true">⟲</span>
+                    <span class="flip-hint__txt" data-i18n="flipFront">Нажмите, чтобы открыть контакты</span>
+                </span>
+            </section>
+
+            <!-- ОБРАТНАЯ СТОРОНА -->
+            <section class="face face--back">
+                <div class="face__glow" aria-hidden="true"></div>
+
+                <header class="back-head">
+                    <span class="back-head__brand">Bizning Go'sht</span>
+                    <span class="back-head__sub" data-i18n="contacts">Контакты</span>
+                </header>
+
+                <div class="contacts">
+                    <a class="contact" href="tel:+998990920030" data-noflip>
+                        <span class="contact__ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.6 2h3.1l1.6 4-2.1 1.5a13 13 0 0 0 5.8 5.8L16.5 11l4 1.6v3.1c0 1-.8 1.9-1.9 1.8C9.7 17 4 11.3 3.1 2.9 3 1.8 3.9 1 4.9 1z"/></svg>
+                        </span>
+                        <span class="contact__txt">
+                            <small data-i18n="lblPhone">Телефон</small>
+                            +998 99 092 00 30
+                        </span>
+                    </a>
+
+                    <a class="contact" href="mailto:ceo@bizninggosht.uz" data-noflip>
+                        <span class="contact__ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1l8 5 8-5V7z"/></svg>
+                        </span>
+                        <span class="contact__txt">
+                            <small data-i18n="lblEmail">Email</small>
+                            ceo@bizninggosht.uz
+                        </span>
+                    </a>
+
+                    <a class="contact" href="https://t.me/bizninggosht" target="_blank" rel="noopener" data-noflip>
+                        <span class="contact__ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M21.9 4.3 18.6 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9-8.1c.4-.3-.1-.5-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1-1 .2-1.5l18.8-7.2c.9-.3 1.6.2 1.5 1.4z"/></svg>
+                        </span>
+                        <span class="contact__txt">
+                            <small data-i18n="lblTelegram">Telegram</small>
+                            @bizninggosht
+                        </span>
+                    </a>
+
+                    <a class="contact" href="https://bizninggosht.uz" target="_blank" rel="noopener" data-noflip>
+                        <span class="contact__ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.9a15.7 15.7 0 0 0-1.3-3.2A8 8 0 0 1 18.9 8zM12 4.1c.8 1.1 1.5 2.4 1.9 3.9h-3.8c.4-1.5 1.1-2.8 1.9-3.9zM4.3 14a8 8 0 0 1 0-4h3.3a18 18 0 0 0 0 4zm.8 2h2.9c.3 1.2.8 2.3 1.3 3.2A8 8 0 0 1 5.1 16zm2.9-8H5.1a8 8 0 0 1 4.2-3.2C8.8 5.7 8.3 6.8 8 8zm4 12c-.8-1.1-1.5-2.4-1.9-4h3.8c-.4 1.6-1.1 2.9-1.9 4zm2.3-6H9.7a16 16 0 0 1 0-4h4.6a16 16 0 0 1 0 4zm.4 5.2c.5-.9 1-2 1.3-3.2h2.9a8 8 0 0 1-4.2 3.2zM16.4 14a18 18 0 0 0 0-4h3.3a8 8 0 0 1 0 4z"/></svg>
+                        </span>
+                        <span class="contact__txt">
+                            <small data-i18n="lblWebsite">Сайт</small>
+                            bizninggosht.uz
+                        </span>
+                    </a>
+                </div>
+
+                <p class="bizinfo" data-i18n="addr">Ташкент · Ойбек 50/54 · Пн–Сб 9:00–22:00</p>
+
+                <div class="qr">
+                    <div class="qr__tile">
+                        <img src="qr-hasan.svg" alt="QR-код с контактом Hasan Abidov">
+                    </div>
+                    <span class="qr__cap" data-i18n="qrCap">Наведите камеру — контакт сохранится сам</span>
+                </div>
+
+                <button class="save-btn" type="button" data-noflip>
+                    <svg class="save-btn__ic save-btn__ic--save" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3v9.6l3.3-3.3 1.4 1.4L12 16.4 7.3 10.7l1.4-1.4L12 12.6V3zM5 18h14v2H5z"/></svg>
+                    <svg class="save-btn__ic save-btn__ic--done" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg>
+                    <span class="save-btn__txt" data-i18n="save">Сохранить контакт</span>
+                </button>
+
+                <span class="flip-hint flip-hint--back">
+                    <span class="flip-hint__icon" aria-hidden="true">⟲</span>
+                    <span class="flip-hint__txt" data-i18n="back">Назад</span>
+                </span>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        window.CARD = {
+            family: "Abidov",
+            given:  "Hasan",
+            fn:     "Hasan Abidov",
+            org:    "Bizning Go'sht",
+            title:  "CEO",
+            tel:    "+998990920030",
+            email:  "ceo@bizninggosht.uz",
+            url:    "https://bizninggosht.uz",
+            extra: [
+                "URL:https://t.me/bizninggosht",
+                "ADR;TYPE=WORK:;;Oybek 50, 54;Tashkent;;;Uzbekistan",
+            ],
+            file:   "Hasan_Abidov.vcf",
+        };
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
