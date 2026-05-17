@@ -93,7 +93,7 @@ body {
 .card.is-flipped { transform: rotateY(180deg); }
 .card:focus-visible { outline: 2px solid var(--red-soft); outline-offset: 8px; border-radius: var(--radius); }
 
-/* ---------- Стеклянные стороны ---------- */
+
 .face {
     position: absolute;
     inset: 0;
