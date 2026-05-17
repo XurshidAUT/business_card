@@ -1,16 +1,33 @@
-// ===== Данные контакта (vCard 3.0) — совпадают с QR-кодом =====
-const VCARD = [
-    "BEGIN:VCARD",
-    "VERSION:3.0",
-    "N:Boymirzayev;Islomjon;;;",
-    "FN:Islomjon Boymirzayev",
-    "ORG:Bizning Gosht",
-    "TITLE:Founder & CEO",
-    "TEL;TYPE=CELL:+998946666664",
-    "EMAIL;TYPE=INTERNET:ceo@bizninggosht.uz",
-    "URL:https://t.me/MBimporteRs",
-    "END:VCARD"
-].join("\r\n") + "\r\n";
+// ===== Данные контакта (vCard 3.0) =====
+// Поля задаются на странице через window.CARD; ниже — запасные значения.
+const CARD = window.CARD || {
+    family: "Boymirzayev",
+    given:  "Islomjon",
+    fn:     "Islomjon Boymirzayev",
+    org:    "Bizning Gosht",
+    title:  "Founder & CEO",
+    tel:    "+998946666664",
+    email:  "ceo@bizninggosht.uz",
+    url:    "https://t.me/MBimporteRs",
+    file:   "Islomjon_Boymirzayev.vcf",
+};
+
+const VCARD = (() => {
+    const lines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:${CARD.family};${CARD.given};;;`,
+        `FN:${CARD.fn}`,
+        `ORG:${CARD.org}`,
+        `TITLE:${CARD.title}`,
+        `TEL;TYPE=CELL:${CARD.tel}`,
+        `EMAIL;TYPE=INTERNET:${CARD.email}`,
+        `URL:${CARD.url}`,
+    ];
+    if (Array.isArray(CARD.extra)) lines.push(...CARD.extra);
+    lines.push("END:VCARD");
+    return lines.join("\r\n") + "\r\n";
+})();
 
 // ===== Переводы интерфейса (RU / EN / 中文) =====
 const I18N = {
@@ -20,6 +37,8 @@ const I18N = {
         lblPhone:  "Телефон",
         lblEmail:  "Email",
         lblTelegram: "Telegram",
+        lblWebsite: "Сайт",
+        addr:      "Ташкент · Ойбек 50/54 · Пн–Сб 9:00–22:00",
         qrCap:     "Наведите камеру — контакт сохранится сам",
         save:      "Сохранить контакт",
         saved:     "Контакт сохранён",
@@ -31,6 +50,8 @@ const I18N = {
         lblPhone:  "Phone",
         lblEmail:  "Email",
         lblTelegram: "Telegram",
+        lblWebsite: "Website",
+        addr:      "Tashkent · Oybek 50/54 · Mon–Sat 9:00–22:00",
         qrCap:     "Point your camera — the contact saves itself",
         save:      "Save contact",
         saved:     "Contact saved",
@@ -42,6 +63,8 @@ const I18N = {
         lblPhone:  "电话",
         lblEmail:  "邮箱",
         lblTelegram: "Telegram",
+        lblWebsite: "网站",
+        addr:      "塔什干 · Oybek 50/54 · 周一至周六 9:00–22:00",
         qrCap:     "用相机扫一扫，自动保存联系人",
         save:      "保存联系人",
         saved:     "已保存联系人",
@@ -106,7 +129,7 @@ function downloadVCard() {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "Islomjon_Boymirzayev.vcf";
+    link.download = CARD.file || "contact.vcf";
     link.rel = "noopener";
     document.body.appendChild(link);
     link.click();
