@@ -442,7 +442,6 @@ html[lang="zh"] .contact__txt small { letter-spacing: 0.04em; }
     .lang__btn { padding: 6px 12px; font-size: 11px; }
 }
 
-/* ---------- Уважение к настройке «меньше движения» ---------- */
 @media (prefers-reduced-motion: reduce) {
     .bg-blob, .flip-hint__icon { animation: none; }
     .card { transition-duration: 0.45s; }
